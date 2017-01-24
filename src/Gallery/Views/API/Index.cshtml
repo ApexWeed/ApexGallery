@@ -1,0 +1,63 @@
+﻿@{ 
+    ViewData["Title"] = "API Reference";
+}
+<div class="container body-content">
+    <h2>API</h2>
+    <p>All requests to the API use HTTP GET because everything is read only.</p>
+    <h3>Forenotes</h3>
+    <p>All internal paths in the API use : to split directories rather than / to allow for easier URL forming. Any returned value from the API containing a URL will have paths formatted with /.</p>
+    <p>For any API function that accepts <b>path</b>, the root will be assumed if none is given.</p>
+    <h3>/API/Languages</h3>
+    <p>Returns a dictionary of language codes to display names. Using a language code not listed in here will result in a 401 error.</p>
+<pre>{
+    "success": bool,
+    "languages":
+        {
+            "code": "name"
+        }
+}</pre>
+    <h3>/API/Count/{path}</h3>
+    <p>Counts the images in the specified <b>path</b>.</p>
+<pre>{
+    "success": bool,
+    "count": int
+}</pre>
+    <h3>/API/{lang}/Directory/{path}</h3>
+    <p>Returns a list of directories in the specified <b>path</b>.</p>
+<pre>{
+    "success": bool,
+    "directories":
+    [
+        {
+            "name": "display-name",
+            "path": "api-path"
+        }
+    ]
+}</pre>
+    <h3>/API/{lang}/Images/{path}/{start}/{count}</h3>
+    <p>Returns a list of images in the specified <b>path</b>. <b>Start</b> defaults to 0, <b>count</b> defaults to 50.</p>
+<pre>{
+    "success": bool,
+    "start": int,
+    "end": int,
+    "count": int,
+    "images":
+    [
+        {
+            "name": "image-name-without-extension",
+            "path": "https://www.site.com/path/to/image.jpg",
+            "thumb": "https://www.site.com/path/to/thumbnail.jpg",
+            "animated": bool
+        }
+    ]
+}</pre>
+    <h2>Error Codes</h2>
+    <h3>301</h3>
+    <p>Relative paths not allowed.</p>
+    <h3>401</h3>
+    <p>Language not found.</p>
+    <h3>402</h3>
+    <p>Directory not found.</p>
+    <h3>403</h3>
+    <p>Invalid parameter.</p>
+</div>

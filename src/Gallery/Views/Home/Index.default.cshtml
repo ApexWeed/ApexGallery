@@ -1,0 +1,22 @@
+﻿@model Gallery.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Gallery";
+    ViewData["CurrentLanguage"] = Model.Language;
+    ViewData["LanguageText"] = Model.Strings["language"];
+    ViewData["LanguageList"] = Model.Languages;
+}
+<div style="display:none" id="strings">
+    <div style="display:none" id="lang">@Model.Language</div>
+    <div style="display:none" id="total">@Model.Strings["total"]</div>
+    <div style="display:none" id="count"></div>
+</div>
+
+<div class="dirs"></div>
+<div class="gallery">
+    <div class="images">
+        @Model.Strings["select-folder"]
+    </div>
+    <div class="controls">
+    </div>
+</div>
