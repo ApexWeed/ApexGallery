@@ -180,7 +180,7 @@ function loadDirectory(node) {
                 // As this is the first time the folder is loaded, we need the image count.
                 $.ajax('/API/Count/{0}'.format(path)).done(function (data) {
                     if (data.success) {
-                        var pageCount = ((data.count / pageSize) >> 0) + 1;
+                        var pageCount = (((data.count - 1) / pageSize) >> 0) + 1;
                         // Previous and first page buttons, as this is loaded from the directory browser we know it's page 1.
                         var html = '<a class="page" href="#{0}|0">&lt;&lt;</a> <a class="page" href="#{0}|0">&lt;</a> '.format(path);
                         for (var i = 0; i < pageCount; i++) {
@@ -224,7 +224,7 @@ function loadDirectory(node) {
                 // Reuse image count from last time.
                 var count = $("#count").text();
                 
-                var pageCount = ((count / pageSize) >> 0) + 1;
+                var pageCount = (((count - 1) / pageSize) >> 0) + 1;
                 var prev = offset - pageSize;
                 if (prev < 0) {
                     prev = 0;
