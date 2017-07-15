@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Gallery.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -48,11 +50,12 @@ namespace Gallery.Controllers
             var images = new List<GalleryImage>();
             var loaded = 0;
             var toSkip = Start;
-            foreach (var file in System.IO.Directory.EnumerateFiles(Path))
+            
+            // Sort by modification date.
+            foreach (var file in new DirectoryInfo(Path).GetFiles().OrderBy(p => p.LastWriteTimeUtc))
             {
                 // Have to make sure it's an image before skipping it on the counter because webms and shit.
-                var extension = System.IO.Path.GetExtension(file);
-                if (!_APISettings.ImageFormats.Contains(extension))
+                if (!_APISettings.ImageFormats.Contains(file.Extension))
                 {
                     continue;
                 }
@@ -70,7 +73,7 @@ namespace Gallery.Controllers
                     break;
                 }
 
-                images.Add(CreateImageInfo(file));
+                images.Add(CreateImageInfo(file.FullName));
             }
 
             return new ImagesModel(Start, images);
