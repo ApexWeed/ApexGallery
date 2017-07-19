@@ -7,12 +7,12 @@
         public string Thumb { get; set; }
         public bool Animated { get; set; }
 
-        public GalleryImage(string Name, string Path, string Thumb, bool Animated)
+        public GalleryImage(string name, string path, string thumb, bool animated)
         {
-            this.Name = Name;
-            this.Path = Path;
-            this.Thumb = Thumb;
-            this.Animated = Animated;
+            Name = name;
+            Path = path;
+            Thumb = thumb;
+            Animated = animated;
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Gallery.Models
         public bool Success { get { return true; } }
         public Dictionary<string, string> Languages { get; set; }
         
-        public LanguageModel(Dictionary<string, string> Languages)
+        public LanguageModel(Dictionary<string, string> languages)
         {
-            this.Languages = Languages;
+            Languages = languages;
         }
     }
 }

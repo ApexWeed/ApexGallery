@@ -2,12 +2,12 @@
 {
     public class CountModel
     {
-        public bool Success { get { return true; } }
+        public bool Success => true;
         public int Count { get; set; }
 
-        public CountModel(int Count)
+        public CountModel(int count)
         {
-            this.Count = Count;
+            Count = count;
         }
     }
 }

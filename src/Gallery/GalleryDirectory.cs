@@ -5,10 +5,10 @@
         public string Name { get; set; }
         public string Path { get; set; }
 
-        public GalleryDirectory(string Name, string Path)
+        public GalleryDirectory(string name, string path)
         {
-            this.Name = Name;
-            this.Path = Path;
+            Name = name;
+            Path = path;
         }
     }
 }

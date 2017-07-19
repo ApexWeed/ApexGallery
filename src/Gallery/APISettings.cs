@@ -2,7 +2,7 @@
 
 namespace Gallery
 {
-    public class APISettings
+    public class ApiSettings
     {
         /// <summary>
         /// Base path on the server for images.
@@ -11,7 +11,7 @@ namespace Gallery
         /// <summary>
         /// Base URL for public access to images.
         /// </summary>
-        public string BaseURL { get; set; }
+        public string BaseUrl { get; set; }
         /// <summary>
         /// Base path on the server for thumbnails.
         /// </summary>
@@ -19,7 +19,7 @@ namespace Gallery
         /// <summary>
         /// Base path for public access to thumbnails.
         /// </summary>
-        public string ThumbURL { get; set; }
+        public string ThumbUrl { get; set; }
         /// <summary>
         /// Size of thumbnail images.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Gallery
         /// </summary>
         public List<string> ImageFormats { get; set; }
         /// <summary>
-        /// Dictionary of language codess mapping to dictionaries of translatable folder names.
+        /// Dictionary of language codes mapping to dictionaries of translatable folder names.
         /// </summary>
         public Dictionary<string, Dictionary<string, string>> Folders { get; set; }
         /// <summary>

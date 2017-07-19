@@ -2,14 +2,14 @@
 {
     public class ErrorModel
     {
-        public bool Success { get { return false; } }
+        public bool Success => false;
         public int Code { get; set; }
         public string Error { get; set; }
 
-        public ErrorModel(int Code, string Error)
+        public ErrorModel(int code, string error)
         {
-            this.Code = Code;
-            this.Error = Error;
+            Code = code;
+            Error = error;
         }
     }
 }

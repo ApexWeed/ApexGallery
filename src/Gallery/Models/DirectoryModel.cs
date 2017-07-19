@@ -4,12 +4,12 @@ namespace Gallery.Models
 {
     public class DirectoryModel
     {
-        public bool Success { get { return true; } }
+        public bool Success => true;
         public List<GalleryDirectory> Directories { get; set; }
 
-        public DirectoryModel(List<GalleryDirectory> Directories)
+        public DirectoryModel(List<GalleryDirectory> directories)
         {
-            this.Directories = Directories;
+            Directories = directories;
         }
     }
 }

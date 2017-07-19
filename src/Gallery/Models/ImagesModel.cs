@@ -10,10 +10,10 @@ namespace Gallery.Models
         public int Count { get { return Images.Count; } }
         public List<GalleryImage> Images { get; set; }
 
-        public ImagesModel(int Start, List<GalleryImage> Images)
+        public ImagesModel(int start, List<GalleryImage> images)
         {
-            this.Start = Start;
-            this.Images = Images;
+            Start = start;
+            Images = images;
         }
     }
 }

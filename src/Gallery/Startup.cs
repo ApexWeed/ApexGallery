@@ -12,8 +12,8 @@ namespace Gallery
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -26,11 +26,11 @@ namespace Gallery
             // Add framework services.
             services.AddMvc();
 
-            var APISettings = Configuration.GetSection("Gallery:API");
-            services.Configure<APISettings>(APISettings);
+            var apiSettings = Configuration.GetSection("Gallery:API");
+            services.Configure<ApiSettings>(apiSettings);
 
-            var InterfaceSettings = Configuration.GetSection("Gallery:Interface");
-            services.Configure<InterfaceSettings>(InterfaceSettings);
+            var interfaceSettings = Configuration.GetSection("Gallery:Interface");
+            services.Configure<InterfaceSettings>(interfaceSettings);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,36 +55,36 @@ namespace Gallery
             {
                 routes
                     .MapRoute(
-                        name: "images",
-                        template: "API/{lang}/Images/{path=}/{start=0}/{count=50}",
-                        defaults: new { controller = "API", action= "Images" }
+                        "images",
+                        "API/{lang}/Images/{path=}/{start=0}/{count=50}",
+                        new { controller = "API", action= "Images" }
                     ).MapRoute(
-                        name: "dirs",
-                        template: "API/{lang}/Directory/{path=}",
-                        defaults: new { controller = "API", action = "Directory" }
+                        "dirs",
+                        "API/{lang}/Directory/{path=}",
+                        new { controller = "API", action = "Directory" }
                     ).MapRoute(
-                        name: "thumb-dir",
-                        template: "API/ThumbDirectory/{path=}/{recurse=false}",
-                        defaults: new { controller = "API", action = "ThumbDirectory" }
+                        "thumb-dir",
+                        "API/ThumbDirectory/{path=}/{recurse=false}",
+                        new { controller = "API", action = "ThumbDirectory" }
                     ).MapRoute(
-                        name: "thumb-image",
-                        template: "API/ThumbImages/{path=}/{start=0}/{count=50}",
-                        defaults: new { controller = "API", action = "ThumbImages" }
+                        "thumb-image",
+                        "API/ThumbImages/{path=}/{start=0}/{count=50}",
+                        new { controller = "API", action = "ThumbImages" }
                     ).MapRoute(
-                        name: "api",
-                        template: "API/{action=Index}/{path?}",
-                        defaults: new { controller = "API" }
+                        "api",
+                        "API/{action=Index}/{path?}",
+                        new { controller = "API" }
                     ).MapRoute(
-                        name: "gallery",
-                        template: "{lang?}",
-                        defaults: new { controller = "Home", action = "Index" }
+                        "gallery",
+                        "{lang?}",
+                        new { controller = "Home", action = "Index" }
                     ).MapRoute(
-                        name: "gallery-direct",
-                        template: "Home/{lang?}",
-                        defaults: new { controller = "Home", action = "Index" }
+                        "gallery-direct",
+                        "Home/{lang?}",
+                        new { controller = "Home", action = "Index" }
                     ).MapRoute(
-                        name: "default",
-                        template: "{controller=Home}/{action=Index}/{id?}");
+                        "default",
+                        "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

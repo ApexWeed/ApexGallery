@@ -2,14 +2,14 @@
 {
     public class ThumbnailModel
     {
-        public bool Success { get { return true; } }
+        public bool Success => true;
         public int Generated { get; set; }
         public int Count { get; set; }
 
-        public ThumbnailModel(int Generated, int Count)
+        public ThumbnailModel(int generated, int count)
         {
-            this.Generated = Generated;
-            this.Count = Count;
+            Generated = generated;
+            Count = count;
         }
     }
 }

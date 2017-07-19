@@ -6,29 +6,29 @@ namespace Gallery.Controllers
 {
     public class HomeController : Controller
     {
-        private APISettings _APISettings;
-        private InterfaceSettings _InterfaceSettings;
+        private readonly ApiSettings _apiSettings;
+        private readonly InterfaceSettings _interfaceSettings;
 
-        public HomeController(IOptions<APISettings> APISettings, IOptions<InterfaceSettings> InterfaceSettings)
+        public HomeController(IOptions<ApiSettings> apiSettings, IOptions<InterfaceSettings> interfaceSettings)
         {
-            _APISettings = APISettings.Value;
-            _InterfaceSettings = InterfaceSettings.Value;
+            _apiSettings = apiSettings.Value;
+            _interfaceSettings = interfaceSettings.Value;
         }
 
-        public IActionResult Index(string Lang)
+        public IActionResult Index(string lang)
         {
             // Handle missing and invalid languages.
-            if (Lang == null || !_APISettings.Languages.ContainsKey(Lang))
+            if (lang == null || !_apiSettings.Languages.ContainsKey(lang))
             {
-                var newLang = LanguageManager.SelectLanguage(_APISettings.Languages, Request.Headers["Accept-Language"], "en");
+                var newLang = LanguageManager.SelectLanguage(_apiSettings.Languages, Request.Headers["Accept-Language"], "en");
                 return new RedirectResult($"/{newLang}/");
             }
             
             var viewModel = new HomeViewModel
             {
-                Strings = _InterfaceSettings.Strings[Lang],
-                Language = Lang,
-                Languages = _APISettings.Languages
+                Strings = _interfaceSettings.Strings[lang],
+                Language = lang,
+                Languages = _apiSettings.Languages
             };
 
             return View(viewModel);
