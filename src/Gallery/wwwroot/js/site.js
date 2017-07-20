@@ -199,7 +199,7 @@ function loadDirectory(node) {
                         for (var i = 0; i < pageCount; i++) {
                             html += '<a class="page" href="#{0}|{1}">{2}</a> '.format(path, i * pageSize, i + 1);
                         }
-                        html += '<a class="page" href="#{0}|{1}">&gt;</a> <a class="page" href="#{0}|{2}">&gt;&gt;</a> <br />'.format(path, pageSize, (pageCount - 1) * pageSize);
+                        html += '<a class="page" href="#{0}|{1}">&gt;</a> <a class="page" href="#{0}|{2}">&gt;&gt;</a> <br />'.format(path, pageCount === 1 ? 0 : pageSize, (pageCount - 1) * pageSize);
                         html += $("#strings #total").text().format(data.count);
                         controls.html(html);
                         $("#count").html(data.count);
@@ -262,7 +262,7 @@ function loadDirectory(node) {
                     }
                     
                 }
-                html += '<a class="page" href="#{0}|{1}">&gt;</a> <a class="page" href="#{0}|{2}">&gt;&gt;</a> '.format(path, next, (pageCount - 1) * pageSize);
+                html += '<a class="page" href="#{0}|{1}">&gt;</a> <a class="page" href="#{0}|{2}">&gt;&gt;</a> '.format(path, pageCount === 1 ? 0 : next, (pageCount - 1) * pageSize);
                 html += "<br /><span>{0}</span> total".format(count);
                 controls.html(html);
             } else {
