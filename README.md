@@ -1,7 +1,7 @@
 # Apex Gallery
-Aspnetcore based image gallery. JSON backend with a jQuery frontend. Supports interface and folder name localisation. Tested on CentOS 7.2, default thumbnail command will not function on Windows.
+Aspnetcore based image gallery. JSON backend with a jQuery frontend. Supports interface and folder name localisation. Tested on CentOS 7.2 and Arch, default thumbnail command will not function on Windows.
 
-A live version can be viewed [here](https://portfolio.helifreak.club/gallery/).
+An outdated live version can be viewed [here](https://portfolio.helifreak.club/gallery/).
 
 # Install
 - Copy appsettings.default.json to appsettings.json and edit.
