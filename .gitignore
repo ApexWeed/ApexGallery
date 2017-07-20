@@ -32,3 +32,4 @@ appsettings.json
 appsettings.Development.json
 src/Gallery/Views/Home/Contact.cshtml
 src/Gallery/Views/Home/Index.cshtml
+*.swp

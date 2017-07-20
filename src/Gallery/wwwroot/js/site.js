@@ -27,8 +27,10 @@ if (String.prototype.format == undefined) {
 }
 
 $(document).ready(function () {
-    if ($("dirs") !== null)
-    {
+    $.fancybox.defaults.loop = true;
+    $.fancybox.defaults.slideShow.speed = 1000;
+
+    if ($("dirs") !== null) {
         galleryLoad();
     }
 });
@@ -182,7 +184,7 @@ function loadDirectory(node) {
                     if (data.images.hasOwnProperty(idx)) {
                         var image = data.images[idx];
                         $(images).append(
-                            '<a href="{0}"><img src="{1}"></a>'.format(image.path, image.thumb, image.name));
+                            '<a data-fancybox="gallery" href="{0}"><img src="{1}"></a>'.format(image.path, image.thumb, image.name));
                     }
                 }
 
@@ -231,7 +233,7 @@ function loadDirectory(node) {
                     if (data.images.hasOwnProperty(idx)) {
                         var image = data.images[idx];
                         $(images).append(
-                            '<a href="{0}"><img src="{1}"></a>'.format(image.path, image.thumb, image.name));
+                            '<a data-fancybox="gallery" href="{0}"><img src="{1}"></a>'.format(image.path, image.thumb, image.name));
                     }
                 }
 

@@ -1,15 +1,44 @@
 ﻿@model Gallery.Models.HomeViewModel
 
+@section scripts
+{
+    <environment names="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.js" integrity="sha256-/pohI78s+dNrV0JHDEkAGqET7dEomDnFIBxy8wdapJk=" crossorigin="anonymous"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous" />
+    </environment>
+}
+
+@section styles
+{
+    <environment names="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.css" integrity="sha256-+NKNIETK1i1ogVC00edn7TlVh86LAxaEVkquhQER+4Y=" crossorigin="anonymous" />
+    </environment>
+    <environment names="Staging,Production>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js" integrity="sha256-wzoq0P7w2qLzRcJsF319y6G9Oilk3nU5CZ8tnY9TjFI=" crossorigin="anonymous"></script>
+    </environment>
+}
+
 @{
     ViewData["Title"] = "Gallery";
     ViewData["CurrentLanguage"] = Model.Language;
     ViewData["LanguageText"] = Model.Strings["language"];
     ViewData["LanguageList"] = Model.Languages;
 }
+
 <div style="display:none" id="strings">
     <div style="display:none" id="lang">@Model.Language</div>
     <div style="display:none" id="total">@Model.Strings["total"]</div>
     <div style="display:none" id="count"></div>
+</div>
+
+<div id="lightbox" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img />
+        <p>Image name</p>
+    </div>
 </div>
 
 <div class="dirs"></div>
