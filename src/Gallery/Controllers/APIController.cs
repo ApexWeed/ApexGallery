@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gallery.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,10 @@ namespace Gallery.Controllers
             {
                 // Have to make sure it's an image before skipping it on the counter because webms and shit.
                 if (!_apiSettings.ImageFormats.Contains(file.Extension))
+                    continue;
+
+                // Skip excluded images.
+                if (_apiSettings.ExcludedFiles.Any(pattern => Regex.IsMatch(file.Name, pattern)))
                     continue;
 
                 // Have to skip start of the directory if the user is loading page 2 etc.
@@ -169,6 +174,13 @@ namespace Gallery.Controllers
             foreach (var dir in System.IO.Directory.EnumerateDirectories(fullPath))
             {
                 var dirName = Path.GetFileName(dir);
+
+                // Skip excluded directories.
+                if (_apiSettings.ExcludedPaths.Any(pattern => Regex.IsMatch(dir, pattern)))
+                    continue;
+                if (_apiSettings.ExcludedFolders.Any(pattern => Regex.IsMatch(dirName, pattern)))
+                    continue;
+
                 // Translate directory name if it's known.
                 if (currentLanguage.ContainsKey(dirName))
                 {
@@ -190,7 +202,8 @@ namespace Gallery.Controllers
             if (fullPath == null)
                 return Json(error);
 
-            var count = System.IO.Directory.EnumerateFiles(fullPath).Select(Path.GetExtension).Count(extension => _apiSettings.ImageFormats.Contains(extension));
+            // Matches image extensions and doesn't match an exclusion regex.
+            var count = System.IO.Directory.EnumerateFiles(fullPath).Select(Path.GetFileName).Count(file => _apiSettings.ImageFormats.Contains(Path.GetExtension(file)) && !_apiSettings.ExcludedFiles.Any(pattern => Regex.IsMatch(file, pattern)));
 
             return Json(new CountModel(count));
         }
